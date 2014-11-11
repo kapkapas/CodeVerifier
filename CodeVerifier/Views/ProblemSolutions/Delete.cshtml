@@ -1,0 +1,49 @@
+﻿@model CodeVerifier.Models.ProblemSolution
+
+@{
+    ViewBag.Title = "Delete";
+}
+@if (!Request.IsAuthenticated)
+{
+    @Html.Raw("Ви не маєте права тут бути")
+    <br />
+    @Html.ActionLink("До списку завдань", "Index", "Problems")
+}
+else
+{
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>ProblemSolution</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProblemId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProblemId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SolutionCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SolutionCode)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("До списку завдань", "Index", "Problems")
+            </div>
+        }
+    </div>
+}

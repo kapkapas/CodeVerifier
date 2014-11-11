@@ -1,11 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Web.Security;
 using CodeVerifier.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace CodeVerifier.Controllers
 {
@@ -15,11 +12,6 @@ namespace CodeVerifier.Controllers
         // GET: Problems
         public ActionResult Index()
         {
-            //todo fix this problem
-            //bool hasPermission = false;
-            //if (GetCurrentUser() != null)
-            //    hasPermission = true;
-            //ViewBag.HasPermission = hasPermission;
             return View(db.Problems.ToList());
         }
 
@@ -125,23 +117,6 @@ namespace CodeVerifier.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private MembershipUser GetCurrentUser()
-        {
-            MembershipUser user;
-            //can be exception here
-            try
-            {
-                user = Membership.GetUser(User.Identity.Name);
-                Guid currentUserID = (Guid) user.ProviderUserKey;
-            }
-            catch (Exception)
-            {
-                user=null;
-            }
-            
-           return user;
         }
     }
 }

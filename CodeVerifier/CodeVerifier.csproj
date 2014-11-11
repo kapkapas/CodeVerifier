@@ -162,6 +162,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProblemsController.cs" />
+    <Compile Include="Controllers\ProblemSolutionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +239,11 @@
     <Content Include="Views\Problems\Details.cshtml" />
     <Content Include="Views\Problems\Edit.cshtml" />
     <Content Include="Views\Problems\Index.cshtml" />
+    <Content Include="Views\ProblemSolutions\Create.cshtml" />
+    <Content Include="Views\ProblemSolutions\Delete.cshtml" />
+    <Content Include="Views\ProblemSolutions\DetailsTrash.cshtml" />
+    <Content Include="Views\ProblemSolutions\EditTrash.cshtml" />
+    <Content Include="Views\ProblemSolutions\IndexTrash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

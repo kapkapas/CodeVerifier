@@ -21,7 +21,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Завдання","Index","Problems")</li>
+                    <li>@Html.ActionLink("Набір завдань","Index","Problems")</li>
+                    <li>@Html.ActionLink("Надіслати розв'язок","Create","ProblemSolutions")</li>
                     <li>@Html.ActionLink("Про", "About", "Home")</li>
                     <li>@Html.ActionLink("Зв'яжіться з нами", "Contact", "Home")</li>
                 </ul>
@@ -33,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Code Verifier</p>
+            <p align="center">&copy; @DateTime.Now.Year - Code Verifier</p>
         </footer>
     </div>
 
