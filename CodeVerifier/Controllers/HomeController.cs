@@ -15,14 +15,14 @@ namespace CodeVerifier.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Деяка інформація, яка допоможе вам у користуванні системою";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Маєте пропозиції, зв'яжіться з нами";
 
             return View();
         }
