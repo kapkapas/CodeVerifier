@@ -33,7 +33,18 @@ namespace CodeVerifier.Controllers
             {
                 db.ProblemSolutions.Add(problemSolution);
                 db.SaveChanges();
-                return RedirectToAction("Index","Problems");
+                string result = string.Empty;
+                bool blah=ProblemSolution.CompileCodeToFile(problemSolution.SolutionCode.ToString(),ref result);
+                if (blah)
+                {
+                    ViewBag.CompilationResult = result;
+                }
+                else
+                {
+                    ViewBag.CompilationResult = result;
+                }
+                    return RedirectToAction("Index", "Problems");
+               
             }
 
             return View(problemSolution);
