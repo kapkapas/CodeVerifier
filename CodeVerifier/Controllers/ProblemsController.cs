@@ -12,6 +12,7 @@ namespace CodeVerifier.Controllers
         // GET: Problems
         public ActionResult Index()
         {
+
             return View(db.Problems.ToList());
         }
 

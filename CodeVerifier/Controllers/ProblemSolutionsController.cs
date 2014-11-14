@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using CodeVerifier.Models;
 
@@ -34,15 +28,8 @@ namespace CodeVerifier.Controllers
                 db.ProblemSolutions.Add(problemSolution);
                 db.SaveChanges();
                 string result = string.Empty;
-                bool blah=ProblemSolution.CompileCodeToFile(problemSolution.SolutionCode.ToString(),ref result);
-                if (blah)
-                {
-                    ViewBag.CompilationResult = result;
-                }
-                else
-                {
-                    ViewBag.CompilationResult = result;
-                }
+                bool blah=ProblemSolution.CompileCodeToFile(problemSolution.SolutionCode.ToString(),problemSolution.ProblemId.ToString(),ref result);
+               
                     return RedirectToAction("Index", "Problems");
                
             }
@@ -88,56 +75,3 @@ namespace CodeVerifier.Controllers
         }
     }
 }
-#region TrashCode
-// GET: ProblemSolutions
-//public ActionResult Index()
-//{
-//    return View(db.ProblemSolutions.ToList());
-//}
-
-// GET: ProblemSolutions/Details/5
-//public ActionResult Details(int? id)
-//{
-//    if (id == null)
-//    {
-//        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//    }
-//    ProblemSolution problemSolution = db.ProblemSolutions.Find(id);
-//    if (problemSolution == null)
-//    {
-//        return HttpNotFound();
-//    }
-//    return View(problemSolution);
-//}
-
-// GET: ProblemSolutions/Edit/5
-//public ActionResult Edit(int? id)
-//{
-//    if (id == null)
-//    {
-//        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//    }
-//    ProblemSolution problemSolution = db.ProblemSolutions.Find(id);
-//    if (problemSolution == null)
-//    {
-//        return HttpNotFound();
-//    }
-//    return View(problemSolution);
-//}
-
-// POST: ProblemSolutions/Edit/5
-// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-//[HttpPost]
-//[ValidateAntiForgeryToken]
-//public ActionResult Edit([Bind(Include = "Id,ProblemId,SolutionCode")] ProblemSolution problemSolution)
-//{
-//    if (ModelState.IsValid)
-//    {
-//        db.Entry(problemSolution).State = EntityState.Modified;
-//        db.SaveChanges();
-//        return RedirectToAction("Index");
-//    }
-//    return View(problemSolution);
-//}
-#endregion

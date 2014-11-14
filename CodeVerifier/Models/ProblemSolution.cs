@@ -1,5 +1,9 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace CodeVerifier.Models
 {
@@ -9,10 +13,13 @@ namespace CodeVerifier.Models
         public int ProblemId { get; set; }
         public string SolutionCode { get; set; }
 
-        public static bool CompileCodeToFile(string source, ref string result)
+        //method which compile code to executable file
+        public static bool CompileCodeToFile(string source,string taskId, ref string result)
         {
             CodeDomProvider provider = null;
-            result = string.Empty;
+            string pathToSaveAssembly=HttpRuntime.AppDomainAppPath;
+
+           result = string.Empty;
             bool compileOk = false;
             if (source != null)
             {
@@ -23,7 +30,15 @@ namespace CodeVerifier.Models
             }
             if (provider != null)
             {
-                string exeName = @"default.exe";
+
+                string exeName=string.Empty;// = @"D:\default.exe";
+                exeName += pathToSaveAssembly + "WorkFolder\\" +System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()+ DateTime.Now.ToShortDateString(); //+ "\\" + taskId + ".exe";
+
+                if (!Directory.Exists(exeName))
+                {
+                    Directory.CreateDirectory(exeName);
+                }
+                exeName += "\\" + taskId + ".exe";
                 CompilerParameters cp=new CompilerParameters();
                 //generate executable file
                 cp.GenerateExecutable = true;
@@ -33,7 +48,7 @@ namespace CodeVerifier.Models
                 cp.GenerateInMemory = false;
                 //set whetheer to treat all warnings and errors.
                 cp.TreatWarningsAsErrors = false;
-
+                
                 //invoke compilation form source code
                 CompilerResults cr = provider.CompileAssemblyFromSource(cp, source);
                 if (cr.Errors.Count > 0)
@@ -41,12 +56,13 @@ namespace CodeVerifier.Models
                     result += "Theere are errors in assembly";
                     foreach (var error in cr.Errors)
                     {
-                        result += string.Format("   {0} \n", error.ToString());
+                        result += string.Format("{0}", error.ToString());
                     }
                 }
                 else
                 {
                     result += "Successfully";
+                    result += cr.PathToAssembly;
                 }
                 if (cr.Errors.Count>0)
                 {
